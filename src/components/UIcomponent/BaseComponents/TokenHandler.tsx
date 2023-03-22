@@ -12,19 +12,19 @@ function TokenHandler(props:TokenHandlerProps) {
     const checkIfTokenIsSelected = () => {
         if(selectorTokenSelectionModelState.selectedTokenData == "eth"){
             return (
-              <><SolanaIcon size={`${props.size ? props.size : 36}`} /> <div className='ml-3 text-base font-extrabold text-accent'>SOLANA</div></>
+              <><SolanaIcon size={`${props.size ? props.size : 36}`} /> <div className='ml-3 text-base font-extrabold '>SOLANA</div></>
             )
         }
 
         if(selectorTokenSelectionModelState.selectedTokenData == "t#") {
             return(
-              <><TetherIcon size={`${props.size ? props.size : 36}`} /> <div className='ml-3 text-base font-extrabold text-accent'>TETHER</div></>
+              <><TetherIcon size={`${props.size ? props.size : 36}`} /> <div className='ml-3 text-base font-extrabold '>TETHER</div></>
             )
         }
 
         return (
           <>
-            <div className='mr-2 text-accent'>Select a token</div>
+            <div className='mr-2'>Select a token</div>
             <SelctTokeninfo size='16' />
           </>
         )

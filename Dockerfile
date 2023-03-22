@@ -2,10 +2,17 @@ FROM node:14
 
 WORKDIR /var/app
 
-COPY ./package.json ./
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "dev"]
+ENV DATABASE_URL="file:dev.db" \
+    NEXTAUTH_URL="http://localhost:3000" \
+    DISCORD_CLIENT_ID="" \
+    DISCORD_CLIENT_SECRET=""
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "dev" ]
