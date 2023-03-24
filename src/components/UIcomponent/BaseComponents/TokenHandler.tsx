@@ -10,7 +10,7 @@ function TokenHandler(props:TokenHandlerProps) {
     
     const selectorTokenSelectionModelState = useSelector((state:any) => state.uiControlsReducer)
     const checkIfTokenIsSelected = () => {
-        if(selectorTokenSelectionModelState.selectedTokenData == "eth"){
+        if(selectorTokenSelectionModelState.selectedTokenData == "sol"){
             return (
               <><SolanaIcon size={`${props.size ? props.size : 36}`} /> <div className='ml-3 text-base font-extrabold '>SOLANA</div></>
             )
