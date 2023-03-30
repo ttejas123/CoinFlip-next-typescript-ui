@@ -13,6 +13,8 @@ ENV DATABASE_URL="file:dev.db" \
     DISCORD_CLIENT_ID="" \
     DISCORD_CLIENT_SECRET=""
 
+RUN npm run postinstall 
+
 EXPOSE 3000
 
 CMD [ "npm", "run", "dev" ]
