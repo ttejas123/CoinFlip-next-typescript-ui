@@ -1,6 +1,6 @@
 import React, { ChangeEvent, RefObject, useContext, useEffect, useRef, useState } from 'react'
 import GredientBorder from './BaseComponents/GredientBorder'
-import { SelectFlipToken, SelectTokenCount, SelectTokenCountIn } from '../../assets/img/Icons/Icons'
+import { SelectFlipToken, SelectTokenCount, SelectTokenCountIn, SolanaInfoIcon } from '../../assets/img/Icons/Icons'
 import CoinFace from '../../assets/img/Coin_Face.svg'
 import CoinCross from '../../assets/img/Coin_Cross.svg'
 import Image from 'next/image'
@@ -21,10 +21,6 @@ function SelectCoinFlipTokenModal() {
     return switchTwoX ? val * 2 : val;
   }
 
-  const onChangeOfNUmberOfSol = (event:ChangeEvent<HTMLInputElement>):void => {
-      setNumberOfSol(event.target.valueAsNumber);
-  }
-
   const onRegisterTxn = ():void => {
       RegisterNewTxnContext.RegisterNewTxn({sol: numberOfSol})
       setNumberOfSol(0);
@@ -35,7 +31,9 @@ function SelectCoinFlipTokenModal() {
   }
 
   const trade_value_show_or_hide = ():string => {
-      const value =  numberOfSol.toFixed(2);
+      // const value =  numberOfSol.toFixed(2);
+      let userSelectedTokenBalance:any = 2.3;
+      const value = (userSelectedTokenBalance.toFixed(2));
       if(hide) {
         return "*".repeat(4);
       }
@@ -47,6 +45,18 @@ function SelectCoinFlipTokenModal() {
         if(X_times < 1) return X_times_of_origin_value_lessThan_one(pre, X_times);
         else return pre * X_times;
       })
+  }
+
+  const onChangeOfNUmberOfSol = (event:ChangeEvent<HTMLInputElement>):void => {
+    setNumberOfSol(event.target.valueAsNumber);
+  }
+
+  const styleOnSelect = (val: number):String => {
+      if(switchTwoX) {
+        return val === numberOfSol ? "scale-90 opacity-80" : "";
+      }
+
+      return val === numberOfSol ? "scale-90 opacity-80" : "";
   }
 
   return (
@@ -81,14 +91,14 @@ function SelectCoinFlipTokenModal() {
         <div className='w-full h-full border border-base-300 mt-4 p-5 rounded-2xl text-base-200'>
               <div className='uppercase switchModeCoinFlipButtons rounded-lg text-overline font-bold text-center p-2 hover:scale-95 cursor-pointer transition-all' onClick={()=> setSwitchTwoX((pre:boolean) => !pre)}> Switch x{switchTwoX ? "1" : "2"} Mode </div>
               <div className='grid grid-cols-4 gap-y-2 w-full justify-between mt-4'> 
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(0.1))}>{SwitchtoXmodeValue(0.1)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(0.25))}  >{SwitchtoXmodeValue(0.25)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(0.5))}  >{SwitchtoXmodeValue(0.5)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(1))}  >{SwitchtoXmodeValue(1)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(2))}>{SwitchtoXmodeValue(2)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(3))}  >{SwitchtoXmodeValue(3)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(4))}  >{SwitchtoXmodeValue(4)}</div>
-                <div className='btn-token-increase font-bold cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center rounded-xl' onClick={()=> setNumberOfSol(SwitchtoXmodeValue(5))}  >{SwitchtoXmodeValue(5)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(0.1))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(0.1))}>{SwitchtoXmodeValue(0.1)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(0.25))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(0.25))}  >{SwitchtoXmodeValue(0.25)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(0.5))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(0.5))}  >{SwitchtoXmodeValue(0.5)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(1))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(1))}  >{SwitchtoXmodeValue(1)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(2))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(2))}>{SwitchtoXmodeValue(2)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(3))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(3))}  >{SwitchtoXmodeValue(3)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(4))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(4))}  >{SwitchtoXmodeValue(4)}</div>
+                <div className={`btn-token-increase cursor-pointer hover:scale-90 transition-all py-4 mx-1 text-center text-overline font-bold 2xl:text-base 2xl:font-bold rounded-xl ${styleOnSelect(SwitchtoXmodeValue(5))} `} onClick={()=> setNumberOfSol(SwitchtoXmodeValue(5))}  >{SwitchtoXmodeValue(5)}</div>
               </div>
               <div className='w-full grid grid-cols-2 mt-4 px-1'>
                 <div className='switchModeCoinFlipButtons flex py-3 mr-2 justify-center font-bold rounded-xl items-center cursor-pointer hover:scale-95'
