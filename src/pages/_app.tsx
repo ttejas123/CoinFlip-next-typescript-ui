@@ -10,7 +10,7 @@ import ToastProvider from "../context/ToastContext";
 import store from "../redux/store";
 import { Provider } from "react-redux"
 import '@solana/wallet-adapter-react-ui/styles.css';
-import WalletConnectionProvider from "../context/WalletConnectionProvider";
+// import WalletConnectionProvider from "../context/WalletConnectionProvider";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -18,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <WalletConnectionProvider>
+      {/* <WalletConnectionProvider> */}
         <Provider store={store}>
           <ThemProvider>
             <RecentTxnsProvider>
@@ -28,7 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             </RecentTxnsProvider>
           </ThemProvider>
         </Provider>
-      </WalletConnectionProvider>
+      {/* </WalletConnectionProvider> */}
     </SessionProvider>
   );
 };
